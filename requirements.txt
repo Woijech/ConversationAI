@@ -1,0 +1,9 @@
+langchain-openai~=0.3.13
+pydantic-settings~=2.8.1
+langchain-core~=0.3.52
+pydantic~=2.11.3
+langgraph~=0.3.30
+dotenv~=0.9.9
+python-dotenv~=1.1.0
+aiogram~=3.20.0
+langchain~=0.3.23
