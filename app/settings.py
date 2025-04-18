@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     TELEGRAM_BOT_TOKEN: str
 
     class Config:
-        env_file = ".env"
+        env_file = "../.env"
         env_file_encoding = "utf-8"
     def get_llm_key(self):
         return self.OPENAI_API_KEY

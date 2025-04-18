@@ -1,14 +1,14 @@
-from state_machine.accept_deal_node import accept
-from state_machine.decline_deal_node import decline_offer
-from state_machine.negotiating_node import negotiating
-from state_machine.negotiating_cpm_node import negotiating_cpm
-from state_machine.negotiating_fix_node import negotiating_fix
-from state_machine.rate_node import rate
-from state_machine.start_node import start
+from app.state_machine.accept_deal_node import accept
+from app.state_machine.decline_deal_node import decline_offer
+from app.state_machine.negotiating_node import negotiating
+from app.state_machine.negotiating_cpm_node import negotiating_cpm
+from app.state_machine.negotiating_fix_node import negotiating_fix
+from app.state_machine.rate_node import rate
+from app.state_machine.start_node import start
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 
-from state_machine.user_state import UserState
+from app.state_machine.user_state import UserState
 
 
 def decide(state: UserState):
@@ -45,7 +45,7 @@ workflow.add_conditional_edges(
     decide,
     {
         "accept": "accept",
-        "decline_offer":"decline_offer",
+        "decline_offer": "decline_offer",
         "negotiating": "negotiating",
         "negotiating_fix": "negotiating_fix",
         "negotiating_cpm": "negotiating_cpm"
@@ -56,7 +56,7 @@ workflow.add_conditional_edges(
     decide,
     {
         "accept": "accept",
-        "decline_offer":"decline_offer",
+        "decline_offer": "decline_offer",
         "negotiating_fix": "negotiating_fix",
     }
 )
@@ -66,10 +66,11 @@ workflow.add_conditional_edges(
     {
         "accept": "accept",
         "negotiating_cpm": "negotiating_cpm",
-        "negotiating": "negotiating"
+        "negotiating": "negotiating",
+        "negotiating_fix": "negotiating_fix"
     }
 )
 workflow.add_edge("accept", END)
 workflow.add_edge("decline_offer", END)
 app = workflow.compile(checkpointer=memory,
-                       interrupt_before=["rate", "negotiating", "negotiating_fix", "negotiating_cpm","decline_offer"])
+                       interrupt_before=["rate", "negotiating", "negotiating_fix", "negotiating_cpm", "decline_offer"])

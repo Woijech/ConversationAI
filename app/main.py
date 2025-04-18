@@ -1,9 +1,9 @@
 import asyncio
 
-from handlers.command_handler import command_router
-from handlers.message_handler import message_router
+from app.handlers.command_handler import command_router
+from app.handlers.message_handler import message_router
 from settings import settings
-from logger.logging_tool import logger
+from app.logger.logging_tool import logger
 
 from aiogram import Bot, Dispatcher
 
