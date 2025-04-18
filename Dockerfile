@@ -8,4 +8,4 @@ RUN pip install -r app/requirements.txt
 
 COPY . .
 
-CMD ["python", "-m", "conversation_app.main"]
+CMD ["python", "-m", "app.main"]
